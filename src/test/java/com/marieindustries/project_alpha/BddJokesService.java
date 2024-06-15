@@ -19,8 +19,8 @@ public class BddJokesService {
         this.objectMapper = objectMapper;
     }
 
-    public void addJokeToRepository(final String joke, final String punchline){
-        final Joke constructedJoke = new Joke(1, joke, punchline);
+    public void addJokeToRepository(final int id, final String joke, final String punchline){
+        final Joke constructedJoke = new Joke(id, joke, punchline);
         mockMvcService.post("/api/jokes", constructedJoke);
     }
 
@@ -38,5 +38,9 @@ public class BddJokesService {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public void deleteJokeFromRepository(final Integer jokeId) {
+        mockMvcService.delete("/api/jokes", jokeId);
     }
 }

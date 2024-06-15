@@ -56,4 +56,18 @@ public class BddMockMvcService {
             throw new RuntimeException(e);
         }
     }
+
+    public MvcResult delete(final String url, final Integer jokeId) {
+        try {
+            return mockMvc.perform(MockMvcRequestBuilders
+                    .delete(url + "/" + jokeId)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .accept(MediaType.APPLICATION_JSON))
+                    .andDo(print())
+                    .andExpect(status().isNoContent())
+                    .andReturn();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
