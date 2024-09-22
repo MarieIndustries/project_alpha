@@ -43,8 +43,19 @@ public class JokeSteps {
         dsl.bddJokesService.deleteJokeFromRepository(jokeId);
     }
 
+    @When("the user updates the joke by id:")
+    public void the_user_updates_the_joke_by_id(final DataTable dataTable) {
+        dataTable.asMaps()
+                .forEach(data -> {
+                    final int id = Integer.parseInt(data.get("Id"));
+                    final String joke = data.get("Joke");
+                    final String punchline = data.get("Punchline");
+                    dsl.bddJokesService.updateJokeById(new Joke(id, joke, punchline));
+                });
+    }
+
     @Then("the available jokes should be:")
-    public void the_available_jokes_should_be(final io.cucumber.datatable.DataTable dataTable) {
+    public void the_available_jokes_should_be(final DataTable dataTable) {
         List<Joke> expectedJokes =  dataTable.asMaps()
                 .stream()
                 .map(data -> {

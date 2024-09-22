@@ -26,6 +26,12 @@ public class JokeRestController {
         return jokesRepository.save(joke);
     }
 
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateJoke(@RequestBody final Joke joke){
+        jokesRepository.save(joke);
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteJoke(@PathVariable("id") final String id){

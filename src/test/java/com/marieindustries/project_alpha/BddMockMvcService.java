@@ -70,4 +70,19 @@ public class BddMockMvcService {
             throw new RuntimeException(e);
         }
     }
+
+    public void put(final String url, final Joke joke) {
+        try {
+            mockMvc.perform(MockMvcRequestBuilders
+                        .put(url + "/" + joke.getId())
+                        .content(asJsonString(joke))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                    .andDo(print())
+                    .andExpect(status().isOk())
+                    .andReturn();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

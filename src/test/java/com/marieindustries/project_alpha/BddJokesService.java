@@ -43,4 +43,8 @@ public class BddJokesService {
     public void deleteJokeFromRepository(final Integer jokeId) {
         mockMvcService.delete("/api/jokes", jokeId);
     }
+
+    public void updateJokeById(final Joke joke) {
+        mockMvcService.put("/api/jokes", joke);
+    }
 }
